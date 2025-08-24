@@ -5,27 +5,18 @@ import iasd.coral.webservice.core.dto.CadastroDTO;
 import iasd.coral.webservice.core.dto.LoginDTO;
 import iasd.coral.webservice.core.mapper.UsuarioMapper;
 import iasd.coral.webservice.core.model.Usuario;
-import iasd.coral.webservice.core.model.enums.TipoUsuario;
 import iasd.coral.webservice.core.repository.UsuarioRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-
 @Service
+@RequiredArgsConstructor
 public class AuthService {
-    @Autowired
-    private UsuarioRepository usuarioRepository;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    @Autowired
-    private UsuarioMapper mapper;
-
-    @Autowired
-    private JwtUtil jwtUtil;
+    private final UsuarioRepository usuarioRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final UsuarioMapper mapper;
+    private final JwtUtil jwtUtil;
 
     public String login(LoginDTO loginDTO) {
         Usuario usuario = usuarioRepository.findByEmail(loginDTO.getEmail())

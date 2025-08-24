@@ -9,7 +9,7 @@ import iasd.coral.webservice.core.repository.CriancaRepository;
 import iasd.coral.webservice.core.repository.PresencaRepository;
 import iasd.coral.webservice.core.repository.UsuarioRepository;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -17,24 +17,14 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class PresencaService {
-    @Autowired
-    private PresencaRepository presencaRepository;
-
-    @Autowired
-    private CriancaRepository criancaRepository;
-
-    @Autowired
-    private TransacaoService transacaoService;
-
-    @Autowired
-    private PresencaMapper presencaMapper;
-
-    @Autowired
-    private TransacaoMapper transacaoMapper;
-
-    @Autowired
-    private UsuarioRepository usuarioRepository;
+    private final PresencaRepository presencaRepository;
+    private final CriancaRepository criancaRepository;
+    private final TransacaoService transacaoService;
+    private final PresencaMapper presencaMapper;
+    private final TransacaoMapper transacaoMapper;
+    private final UsuarioRepository usuarioRepository;
 
     @Transactional
     public Presenca registrarPresenca(Long criancaId, Long professorId) {

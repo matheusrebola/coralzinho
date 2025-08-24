@@ -4,7 +4,7 @@ import iasd.coral.webservice.core.dto.PresencaDTO;
 import iasd.coral.webservice.core.model.Presenca;
 import iasd.coral.webservice.core.service.PresencaService;
 import iasd.coral.webservice.core.service.QRCodeService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -14,12 +14,10 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/presenca")
 @CrossOrigin(origins = "*")
+@RequiredArgsConstructor
 public class PresencaController {
-    @Autowired
-    private PresencaService presencaService;
-
-    @Autowired
-    private QRCodeService qrCodeService;
+    private final PresencaService presencaService;
+    private final QRCodeService qrCodeService;
 
     @PostMapping("/registrar/{id}")
     @PreAuthorize("hasAnyRole('PROFESSOR', 'ADMIN')")

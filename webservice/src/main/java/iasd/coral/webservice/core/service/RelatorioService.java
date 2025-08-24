@@ -4,7 +4,7 @@ import iasd.coral.webservice.core.model.Presenca;
 import iasd.coral.webservice.core.repository.CriancaRepository;
 import iasd.coral.webservice.core.repository.PresencaRepository;
 import iasd.coral.webservice.core.repository.TransacaoTonzinhoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -15,15 +15,10 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class RelatorioService {
-    @Autowired
-    private PresencaRepository presencaRepository;
-
-    @Autowired
-    private CriancaRepository criancaRepository;
-
-    @Autowired
-    private TransacaoTonzinhoRepository transacaoRepository;
+    private final PresencaRepository presencaRepository;
+    private final CriancaRepository criancaRepository;
 
     public Map<String, Object> gerarEstatisticasGerais() {
         Map<String, Object> stats = new HashMap<>();
@@ -38,9 +33,6 @@ public class RelatorioService {
 
         // Aniversariantes do mês
         //stats.put("aniversariantesDoMes", getAniversariantesDoMes());
-
-        // Total de tonzinhos em circulação
-        stats.put("totalTonzinhosEmCirculacao", criancaRepository.sumTotalTonzinhos());
 
         return stats;
     }

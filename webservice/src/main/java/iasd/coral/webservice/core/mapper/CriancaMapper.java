@@ -6,8 +6,8 @@ import iasd.coral.webservice.core.model.Usuario;
 import org.springframework.stereotype.Component;
 
 @Component
-public interface CriancaMapper {
-    default Crianca mapear(CriancaDTO dto, Usuario pai){
+public class CriancaMapper {
+    public Crianca mapear(CriancaDTO dto, Usuario pai){
         return Crianca.builder()
                 .nome(dto.getNome())
                 .dataNascimento(dto.getDataNascimento())
@@ -18,7 +18,7 @@ public interface CriancaMapper {
                 .build();
     }
 
-    default CriancaDTO mapear(Crianca crianca) {
+    public CriancaDTO mapear(Crianca crianca) {
         return CriancaDTO.builder()
                 .id(crianca.getId())
                 .nome(crianca.getNome())

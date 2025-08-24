@@ -16,6 +16,4 @@ public interface CriancaRepository extends JpaRepository<Crianca, Long> {
     List<Crianca> findAniversariantesDoMes(int mes);
 
     Integer countByAtivo(boolean b);
-
-    Integer sumTotalTonzinhos();
 }

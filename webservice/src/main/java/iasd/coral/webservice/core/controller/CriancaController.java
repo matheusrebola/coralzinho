@@ -3,7 +3,7 @@ package iasd.coral.webservice.core.controller;
 import iasd.coral.webservice.core.dto.CriancaDTO;
 import iasd.coral.webservice.core.model.Crianca;
 import iasd.coral.webservice.core.service.CriancaService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -15,9 +15,9 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/criancas")
 @CrossOrigin(origins = "*")
+@RequiredArgsConstructor
 public class CriancaController {
-    @Autowired
-    private CriancaService criancaService;
+    private final CriancaService criancaService;
 
     @PostMapping
     @PreAuthorize("hasRole('PAI')")

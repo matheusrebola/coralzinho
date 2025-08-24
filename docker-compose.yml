@@ -3,73 +3,18 @@ version: '3.8'
 services:
   # Banco de Dados PostgreSQL
   postgres:
-    image: postgres:15-alpine
-    container_name: tonzinhos-db
-    restart: unless-stopped
+    image: postgres:15
+    container_name: postgres
     environment:
-      POSTGRES_DB: tonzinhos_db
-      POSTGRES_USER: tonzinhos_user
-      POSTGRES_PASSWORD: ${DB_PASSWORD:-TonzinhosSecure2024!}
-      PGDATA: /var/lib/postgresql/data/pgdata
+      POSTGRES_DB: coralzinho
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      - ./init-db:/docker-entrypoint-initdb.d
     networks:
       - tonzinhos-network
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U tonzinhos_user -d tonzinhos_db"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-
-  # Aplicação Spring Boot
-  app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: tonzinhos-api
-    restart: unless-stopped
-    environment:
-      SPRING_PROFILES_ACTIVE: docker
-      DB_HOST: postgres
-      DB_PORT: 5432
-      DB_NAME: tonzinhos_db
-      DB_USER: tonzinhos_user
-      DB_PASSWORD: ${DB_PASSWORD:-TonzinhosSecure2024!}
-      JWT_SECRET: ${JWT_SECRET:-ChaveSecretaMudarEmProducao2024TonzinhosCoralInfantil}
-      JWT_EXPIRATION: ${JWT_EXPIRATION:-86400000}
-      SERVER_PORT: 8080
-    ports:
-      - "8080:8080"
-    depends_on:
-      postgres:
-        condition: service_healthy
-    networks:
-      - tonzinhos-network
-    volumes:
-      - ./logs:/app/logs
-      - ./uploads:/app/uploads
-
-  # PgAdmin para gerenciamento do banco (opcional)
-  pgadmin:
-    image: dpage/pgadmin4:latest
-    container_name: tonzinhos-pgadmin
-    restart: unless-stopped
-    environment:
-      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL:-admin@igreja.com}
-      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD:-admin123}
-      PGADMIN_CONFIG_SERVER_MODE: 'False'
-      PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED: 'False'
-    ports:
-      - "5050:80"
-    volumes:
-      - pgadmin_data:/var/lib/pgadmin
-    networks:
-      - tonzinhos-network
-    depends_on:
-      - postgres
 
 networks:
   tonzinhos-network:

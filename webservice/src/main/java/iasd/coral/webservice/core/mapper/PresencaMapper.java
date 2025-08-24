@@ -10,8 +10,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public interface PresencaMapper {
-    default Presenca mapear(Crianca crianca, Usuario professor){
+public class PresencaMapper {
+    public Presenca mapear(Crianca crianca, Usuario professor){
         return Presenca.builder()
                 .crianca(crianca)
                 .professor(professor)
@@ -20,11 +20,11 @@ public interface PresencaMapper {
                 .build();
     }
 
-    default List<String> mapear(List<Crianca> crianca){
+    public List<String> mapear(List<Crianca> crianca){
         return crianca.stream().map(this::mapear).collect(Collectors.toList());
     }
 
-    default String mapear(Crianca crianca){
+    public String mapear(Crianca crianca){
         return crianca.getNome();
     }
 }

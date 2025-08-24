@@ -8,23 +8,18 @@ import iasd.coral.webservice.core.model.Usuario;
 import iasd.coral.webservice.core.repository.CriancaRepository;
 import iasd.coral.webservice.core.repository.UsuarioRepository;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class CriancaService {
-    @Autowired
-    private CriancaRepository criancaRepository;
-
-    @Autowired
-    private UsuarioRepository usuarioRepository;
-
-    @Autowired
-    private CriancaMapper criancaMapper;
+    private final CriancaRepository criancaRepository;
+    private final UsuarioRepository usuarioRepository;
+    private final CriancaMapper criancaMapper;
 
     @Transactional
     public Crianca adicionarFilho(CriancaDTO dto, String emailPai) {

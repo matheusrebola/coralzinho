@@ -5,8 +5,8 @@ import iasd.coral.webservice.core.model.Crianca;
 import org.springframework.stereotype.Component;
 
 @Component
-public interface TransacaoMapper {
-    default TransacaoDTO mapear(Crianca crianca, Integer quantidade, String descricao, Long responsavelId){
+public class TransacaoMapper {
+    public TransacaoDTO mapear(Crianca crianca, Integer quantidade, String descricao, Long responsavelId){
         return TransacaoDTO.builder()
                 .crianca(crianca)
                 .quantidade(quantidade)

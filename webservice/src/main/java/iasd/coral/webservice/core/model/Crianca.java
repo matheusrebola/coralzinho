@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-@Table(name = "criancas", indexes = {
+@Table(name = "criancas", schema = "tonzinhos", indexes = {
         @Index(name = "idx_criancas_pai", columnList = "pai_id"),
         @Index(name = "idx_criancas_aniversario", columnList = "data_nascimento"),
         @Index(name = "idx_criancas_ativo", columnList = "ativo")
