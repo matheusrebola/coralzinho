@@ -10,7 +10,12 @@ import java.util.List;
 @Repository
 public interface CriancaRepository extends JpaRepository<Crianca, Long> {
     List<Crianca> findByPaiId(Long paiId);
+    List<Crianca> findByPaiEmail(String emailPai);
 
     @Query("SELECT c FROM Crianca c WHERE MONTH(c.dataNascimento) = ?1")
     List<Crianca> findAniversariantesDoMes(int mes);
+
+    Integer countByAtivo(boolean b);
+
+    Integer sumTotalTonzinhos();
 }

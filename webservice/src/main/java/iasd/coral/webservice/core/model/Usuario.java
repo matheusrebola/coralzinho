@@ -9,7 +9,11 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Table(name = "usuarios")
+@Table(name = "usuarios", schema = "tonzinhos", indexes = {
+        @Index(name = "idx_usuarios_email", columnList = "email"),
+        @Index(name = "idx_usuarios_tipo", columnList = "tipo"),
+        @Index(name = "idx_usuarios_ativo", columnList = "ativo")
+})
 @Getter
 @Setter
 @AllArgsConstructor

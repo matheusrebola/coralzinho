@@ -3,6 +3,7 @@ package iasd.coral.webservice.core.controller;
 import iasd.coral.webservice.core.dto.PresencaDTO;
 import iasd.coral.webservice.core.model.Presenca;
 import iasd.coral.webservice.core.service.PresencaService;
+import iasd.coral.webservice.core.service.QRCodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -17,20 +18,23 @@ public class PresencaController {
     @Autowired
     private PresencaService presencaService;
 
-    @PostMapping("/registrar")
+    @Autowired
+    private QRCodeService qrCodeService;
+
+    @PostMapping("/registrar/{id}")
     @PreAuthorize("hasAnyRole('PROFESSOR', 'ADMIN')")
-    public ResponseEntity<?> registrarPresenca(@RequestBody PresencaDTO presencaDTO) {
+    public ResponseEntity<?> registrarPresenca(@RequestBody PresencaDTO presencaDTO, @PathVariable Long id) {
         Presenca presenca = presencaService.registrarPresenca(
                 presencaDTO.getCriancaId(),
-                getCurrentUserId()
+                id
         );
         return ResponseEntity.ok(presenca);
     }
 
-    @GetMapping("/qrcode")
+    @GetMapping("/qrcode/{id}")
     @PreAuthorize("hasAnyRole('PROFESSOR', 'ADMIN')")
-    public ResponseEntity<?> gerarQRCode() {
-        String qrCode = qrCodeService.generatePresencaQRCode(getCurrentUserId());
+    public ResponseEntity<?> gerarQRCode(@PathVariable Long id) throws Exception {
+        String qrCode = qrCodeService.generatePresencaQRCode(id);
         return ResponseEntity.ok(Map.of("qrCode", qrCode));
     }
 }

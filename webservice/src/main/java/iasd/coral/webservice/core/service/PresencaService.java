@@ -1,16 +1,20 @@
 package iasd.coral.webservice.core.service;
 
+import iasd.coral.webservice.core.mapper.PresencaMapper;
+import iasd.coral.webservice.core.mapper.TransacaoMapper;
 import iasd.coral.webservice.core.model.Crianca;
 import iasd.coral.webservice.core.model.Presenca;
 import iasd.coral.webservice.core.model.Usuario;
 import iasd.coral.webservice.core.repository.CriancaRepository;
 import iasd.coral.webservice.core.repository.PresencaRepository;
+import iasd.coral.webservice.core.repository.UsuarioRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class PresencaService {
@@ -22,6 +26,15 @@ public class PresencaService {
 
     @Autowired
     private TransacaoService transacaoService;
+
+    @Autowired
+    private PresencaMapper presencaMapper;
+
+    @Autowired
+    private TransacaoMapper transacaoMapper;
+
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
     @Transactional
     public Presenca registrarPresenca(Long criancaId, Long professorId) {
@@ -36,18 +49,15 @@ public class PresencaService {
         Crianca crianca = criancaRepository.findById(criancaId)
                 .orElseThrow(() -> new RuntimeException("Criança não encontrada"));
 
-        // Registra presença
-        Presenca presenca = new Presenca();
-        presenca.setCrianca(crianca);
-        presenca.setProfessor(new Usuario()); // Buscar professor pelo ID
-        presenca.setDataHora(LocalDateTime.now());
-        presenca.setTonzinhosGanhos(10); // Valor padrão
+        Usuario professor = usuarioRepository.findById(professorId)
+                .orElseThrow(() -> new RuntimeException("Professor não encontrada"));
 
-        presenca = presencaRepository.save(presenca);
+        transacaoService.adicionarTonzinhos(transacaoMapper.mapear(crianca, 10, "Presença no ensaio", professorId));
 
-        // Adiciona tonzinhos
-        transacaoService.adicionarTonzinhos(crianca, 10, "Presença no ensaio", professorId);
+        return presencaRepository.save(presencaMapper.mapear(crianca, professor));
+    }
 
-        return presenca;
+    public List<String> getPresentesHoje() {
+        return presencaMapper.mapear(presencaRepository.findCriancaByDataHora(LocalDate.now()));
     }
 }

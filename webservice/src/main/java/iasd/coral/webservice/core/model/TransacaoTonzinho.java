@@ -2,19 +2,21 @@ package iasd.coral.webservice.core.model;
 
 import iasd.coral.webservice.core.model.enums.TipoTransacao;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "transacoes_tonzinhos")
+@Table(name = "transacoes_tonzinhos", indexes = {
+        @Index(name = "idx_transacoes_crianca", columnList = "crianca_id"),
+        @Index(name = "idx_transacoes_data", columnList = "data_hora"),
+        @Index(name = "idx_transacoes_tipo", columnList = "tipo")
+})
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class TransacaoTonzinho {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

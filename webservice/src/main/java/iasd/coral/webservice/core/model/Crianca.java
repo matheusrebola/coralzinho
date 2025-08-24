@@ -1,19 +1,22 @@
 package iasd.coral.webservice.core.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
-@Table(name = "criancas")
+@Table(name = "criancas", indexes = {
+        @Index(name = "idx_criancas_pai", columnList = "pai_id"),
+        @Index(name = "idx_criancas_aniversario", columnList = "data_nascimento"),
+        @Index(name = "idx_criancas_ativo", columnList = "ativo")
+})
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Crianca {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -29,18 +29,18 @@ public class RelatorioService {
         Map<String, Object> stats = new HashMap<>();
 
         // Total de crianças ativas
-        //stats.put("totalCriancasAtivas", criancaRepository.countByAtivo(true));
+        stats.put("totalCriancasAtivas", criancaRepository.countByAtivo(true));
 
         // Presença do mês
         LocalDateTime inicioMes = LocalDate.now().withDayOfMonth(1).atStartOfDay();
         LocalDateTime fimMes = LocalDate.now().plusMonths(1).withDayOfMonth(1).atStartOfDay();
-        //stats.put("presencasNoMes", presencaRepository.countByDataHoraBetween(inicioMes, fimMes));
+        stats.put("presencasNoMes", presencaRepository.countByDataHoraBetween(inicioMes, fimMes));
 
         // Aniversariantes do mês
         //stats.put("aniversariantesDoMes", getAniversariantesDoMes());
 
         // Total de tonzinhos em circulação
-        //stats.put("totalTonzinhosEmCirculacao", criancaRepository.sumTotalTonzinhos());
+        stats.put("totalTonzinhosEmCirculacao", criancaRepository.sumTotalTonzinhos());
 
         return stats;
     }

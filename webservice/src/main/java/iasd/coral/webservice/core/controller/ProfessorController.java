@@ -1,5 +1,9 @@
 package iasd.coral.webservice.core.controller;
 
+import iasd.coral.webservice.core.repository.CriancaRepository;
+import iasd.coral.webservice.core.service.CriancaService;
+import iasd.coral.webservice.core.service.PresencaService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,6 +19,15 @@ import java.util.Map;
 @PreAuthorize("hasAnyRole('PROFESSOR', 'ADMIN')")
 @CrossOrigin(origins = "*")
 public class ProfessorController {
+
+    @Autowired
+    private CriancaRepository criancaRepository;
+
+    @Autowired
+    private PresencaService presencaService;
+
+    @Autowired
+    private CriancaService criancaService;
 
     @GetMapping("/dashboard")
     public ResponseEntity<?> dashboard() {
