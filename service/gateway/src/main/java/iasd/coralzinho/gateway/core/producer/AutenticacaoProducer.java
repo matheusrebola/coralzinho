@@ -13,19 +13,20 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class AutenticacaoProducer {
     private final RabbitTemplate rabbitTemplate;
+    private final AutenticacaoMQ autenticacaoMQ;
 
     public void efetuarLogin(LoginReq req) {
         rabbitTemplate.convertAndSend(
-                AutenticacaoMQ.EXCHANGE,
-                AutenticacaoMQ.ROUTING_KEY,
+                autenticacaoMQ.getLoginReqExchange(),
+                autenticacaoMQ.getLoginReqRoutingKey(),
                 req
         );
     }
 
     public void cadastrarUsuario(CadastroReq req) {
         rabbitTemplate.convertAndSend(
-                AutenticacaoMQ.EXCHANGE,
-                AutenticacaoMQ.ROUTING_KEY,
+                autenticacaoMQ.getCadastroReqExchange(),
+                autenticacaoMQ.getCadastroReqRoutingKey(),
                 req
         );
     }

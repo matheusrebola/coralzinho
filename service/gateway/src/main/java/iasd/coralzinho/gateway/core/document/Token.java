@@ -1,6 +1,5 @@
 package iasd.coralzinho.gateway.core.document;
 
-import iasd.coralzinho.gateway.core.document.enums.TipoUsuario;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,11 +12,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 @Data
 @Builder
-public class Login {
+public class Token {
     @Id
     private String email;
-    private String nome;
-    private String senha;
     private String token;
-    private TipoUsuario tipo;
 }

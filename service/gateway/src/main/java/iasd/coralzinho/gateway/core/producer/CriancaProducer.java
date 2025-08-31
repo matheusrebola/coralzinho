@@ -1,20 +1,23 @@
 package iasd.coralzinho.gateway.core.producer;
 
 import iasd.coralzinho.gateway.core.dto.Filho;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
+@Component
+@Slf4j
+@RequiredArgsConstructor
 public class CriancaProducer {
-    public Boolean adicionarFilho(Filho dto, Long id) {
+    public void adicionarFilho(Filho dto, Long id) {
         //TODO: Criar lógica de adicionar filho
-        return null;
     }
 
-    public Boolean atualizarFilho(Filho dto, Long id) {
+    public void atualizarFilho(Filho dto, Long id) {
         //TODO: Criar lógica de atualizar filho
-        return null;
     }
 
-    public Boolean buscarFilhos(Long id) {
+    public void buscarFilhos(Long id) {
         //TODO: Criar lógica de buscar filhos
-        return null;
     }
 }

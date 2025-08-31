@@ -1,10 +1,12 @@
 package iasd.coralzinho.gateway.core.controller;
 
 import iasd.coralzinho.gateway.core.consumer.CriancaConsumer;
+import iasd.coralzinho.gateway.core.document.Token;
 import iasd.coralzinho.gateway.core.dto.CadastroRes;
 import iasd.coralzinho.gateway.core.dto.Filho;
 import iasd.coralzinho.gateway.core.dto.FilhoRes;
 import iasd.coralzinho.gateway.core.producer.CriancaProducer;
+import iasd.coralzinho.gateway.core.service.TokenService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,45 +18,49 @@ import java.util.List;
 @RequestMapping("/criancas")
 @RequiredArgsConstructor
 public class CriancaController {
-    private final CriancaProducer criancaProducer;
-    private final CriancaConsumer criancaConsumer;
+    private final CriancaProducer producer;
+    private final CriancaConsumer consumer;
+    private final TokenService service;
 
-    @PostMapping("/{id}")
-    public ResponseEntity<CadastroRes> adicionarFilho(@RequestBody Filho dto, @PathVariable Long id) {
-        //TODO: criar lógica de adicionar filho
+    @PostMapping
+    public ResponseEntity<CadastroRes> adicionarFilho(@RequestBody Filho dto,
+                                                      @RequestBody Token token,
+                                                      @PathVariable Long id) {
         try {
-            Boolean isAdicionado = criancaProducer.adicionarFilho(dto, id);
-            if (isAdicionado.equals(false)){
-                return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+            if (service.validarToken(token).equals(false)){
+                return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
             }
-            return new ResponseEntity<>(criancaConsumer.filhoAdicionado(), HttpStatus.OK);
+            producer.adicionarFilho(dto, id);
+            return new ResponseEntity<>(consumer.filhoAdicionado(), HttpStatus.OK);
         } catch (RuntimeException e){
             throw new RuntimeException(e);
         }
     }
 
     @PutMapping
-    public ResponseEntity<CadastroRes> atualizarFilho(@RequestBody Filho dto, @PathVariable Long id) {
+    public ResponseEntity<CadastroRes> atualizarFilho(@RequestBody Filho dto,
+                                                      @RequestBody Token token,
+                                                      @PathVariable Long id) {
         //TODO: criar lógica de atualizar filho
         try {
-            Boolean isAdicionado = criancaProducer.atualizarFilho(dto, id);
-            if (isAdicionado.equals(false)){
-                return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+            if (service.validarToken(token).equals(false)){
+                return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
             }
-            return new ResponseEntity<>(criancaConsumer.filhoAtualizado(), HttpStatus.OK);
+            producer.atualizarFilho(dto, id);
+            return new ResponseEntity<>(consumer.filhoAtualizado(), HttpStatus.OK);
         } catch (RuntimeException e){
             throw new RuntimeException(e);
         }
     }
 
     @GetMapping
-    public ResponseEntity<List<FilhoRes>> listarFilhos(@PathVariable Long id) {
+    public ResponseEntity<List<FilhoRes>> listarFilhos(@PathVariable Long id, @RequestBody Token token) {
         try {
-            Boolean isAdicionado = criancaProducer.buscarFilhos(id);
-            if (isAdicionado.equals(false)){
-                return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+            if (service.validarToken(token).equals(false)){
+                return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
             }
-            return new ResponseEntity<>(criancaConsumer.filhosBuscados(), HttpStatus.OK);
+            producer.buscarFilhos(id);
+            return new ResponseEntity<>(consumer.filhosBuscados(), HttpStatus.OK);
         } catch (RuntimeException e){
             throw new RuntimeException(e);
         }

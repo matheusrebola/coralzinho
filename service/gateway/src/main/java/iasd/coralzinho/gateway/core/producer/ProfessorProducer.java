@@ -1,9 +1,14 @@
 package iasd.coralzinho.gateway.core.producer;
 
-import iasd.coralzinho.gateway.core.dto.Horario;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
-import java.time.Month;
+import java.time.LocalDate;
 
+@Component
+@Slf4j
+@RequiredArgsConstructor
 public class ProfessorProducer {
 
 
@@ -12,7 +17,7 @@ public class ProfessorProducer {
         return null;
     }
 
-    public Boolean atualizarHorario(Horario horario) {
+    public Boolean atualizarHorario(LocalDate horario) {
         //TODO: Criar lógica de atualizar horario
         return null;
     }
