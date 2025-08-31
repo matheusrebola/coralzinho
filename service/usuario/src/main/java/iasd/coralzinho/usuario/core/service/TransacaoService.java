@@ -2,6 +2,7 @@ package iasd.coralzinho.usuario.core.service;
 
 import iasd.coralzinho.usuario.core.dto.TransacaoDTO;
 import iasd.coralzinho.usuario.core.mapper.TransacaoMapper;
+import iasd.coralzinho.usuario.core.model.Transacao;
 import iasd.coralzinho.usuario.core.repository.CriancaRepository;
 import iasd.coralzinho.usuario.core.repository.TransacaoRepository;
 import jakarta.transaction.Transactional;
@@ -20,5 +21,10 @@ public class TransacaoService {
         dto.crianca().setSaldoTonzinhos(dto.crianca().getSaldoTonzinhos() + dto.quantidade());
         criancaRepository.save(dto.crianca());
         transacaoRepository.save(transacaoMapper.mapear(dto));
+    }
+
+    @Transactional
+    public Transacao salvar(Transacao transacao) {
+        return transacaoRepository.save(transacao);
     }
 }

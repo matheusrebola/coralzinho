@@ -40,11 +40,11 @@ public class Crianca {
     private List<Transacao> transacoes;
 
     @Column(nullable = false)
-    private Integer saldoTonzinhos = 0;
+    private Integer saldoTonzinhos;
 
     @Column(columnDefinition = "TEXT")
     private String observacoes;
 
     @Column
-    private boolean ativo = true;
+    private Boolean ativo;
 }

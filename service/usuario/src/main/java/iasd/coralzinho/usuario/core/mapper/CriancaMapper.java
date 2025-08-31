@@ -9,11 +9,11 @@ import org.springframework.stereotype.Component;
 public class CriancaMapper {
     public Crianca mapear(CriancaDTO dto, Usuario pai){
         return Crianca.builder()
-                .nome(dto.getNome())
-                .dataNascimento(dto.getDataNascimento())
+                .nome(dto.nome())
+                .dataNascimento(dto.dataNascimento())
                 .pai(pai)
-                .saldoTonzinhos(0)
-                .observacoes(dto.getObservacoes())
+                .saldoTonzinhos(dto.saldoTonzinhos())
+                .observacoes(dto.observacoes())
                 .ativo(true)
                 .build();
     }

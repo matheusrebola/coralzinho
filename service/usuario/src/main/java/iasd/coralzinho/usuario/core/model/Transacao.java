@@ -33,12 +33,6 @@ public class Transacao {
     @Column
     private Integer quantidade;
 
-    @Column(columnDefinition = "TEXT")
-    private String descricao;
-
-    @Column
-    private LocalDateTime dataEnsaio;
-
     @Column
     private LocalDateTime dataHora;
 

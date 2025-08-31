@@ -48,4 +48,8 @@ public class CriancaService {
                 .map(criancaMapper::mapear)
                 .toList();
     }
+
+    public Crianca encontrarPeloId(Long id) {
+        return criancaRepository.findById(id).orElse(null);
+    }
 }

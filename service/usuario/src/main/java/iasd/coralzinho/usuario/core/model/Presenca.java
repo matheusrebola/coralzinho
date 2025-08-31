@@ -31,10 +31,14 @@ public class Presenca {
     private Usuario professor;
 
     @Column
-    private LocalDateTime dataHora;
+    private LocalDateTime registro;
+
+    @ManyToOne
+    @JoinColumn(name = "ensaio_id", nullable = false)
+    private Ensaio ensaio;
 
     @Column(nullable = false)
-    private Integer tonzinhosGanhos = 10; // Valor padrão por presença
+    private Integer tonzinhosGanhos;
 
     @Column(columnDefinition = "TEXT")
     private String observacao;

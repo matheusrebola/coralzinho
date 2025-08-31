@@ -11,12 +11,12 @@ import java.util.stream.Collectors;
 
 @Component
 public class PresencaMapper {
-    public Presenca mapear(Crianca crianca, Usuario professor){
+    public Presenca mapear(Crianca crianca, Usuario professor, Integer tonzinhos){
         return Presenca.builder()
                 .crianca(crianca)
                 .professor(professor)
-                .dataHora(LocalDateTime.now())
-                .tonzinhosGanhos(10)
+                .registro(LocalDateTime.now())
+                .tonzinhosGanhos(tonzinhos)
                 .build();
     }
 
