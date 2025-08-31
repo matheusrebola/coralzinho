@@ -1,10 +1,9 @@
 version: '3.8'
 
 services:
-  # Banco de Dados PostgreSQL
-  postgres:
+  postgres-coralzinho:
     image: postgres:15
-    container_name: postgres
+    container_name: postgres-coralzinho
     environment:
       POSTGRES_DB: coralzinho
       POSTGRES_USER: postgres
@@ -15,13 +14,32 @@ services:
       - postgres_data:/var/lib/postgresql/data
     networks:
       - tonzinhos-network
+    restart: unless-stopped
+
+  rabbitmq:
+    image: rabbitmq:3.13-management
+    container_name: rabbitmq
+    ports:
+      - "25082:15672"
+      - "5672:5672"
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+      - ./rabbitmq/definitions.json:/etc/rabbitmq/definitions.json
+    command: >
+      rabbitmq-server
+      --load_definitions=/etc/rabbitmq/definitions.json
 
 networks:
   tonzinhos-network:
     driver: bridge
+    name: tonzinhos-network
 
 volumes:
   postgres_data:
     driver: local
-  pgadmin_data:
+  rabbitmq_data:
     driver: local
+
