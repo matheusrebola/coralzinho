@@ -23,9 +23,10 @@ public class Crianca {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(length = 200, nullable = false)
     private String nome;
 
+    @Column(columnDefinition = "DATE")
     private LocalDate dataNascimento;
 
     @ManyToOne
@@ -41,7 +42,9 @@ public class Crianca {
     @Column(nullable = false)
     private Integer saldoTonzinhos = 0;
 
+    @Column(columnDefinition = "TEXT")
     private String observacoes;
 
+    @Column
     private boolean ativo = true;
 }

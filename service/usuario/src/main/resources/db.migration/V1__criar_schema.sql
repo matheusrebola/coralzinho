@@ -1,1 +1,1 @@
-CREATE SCHEMA IF NOT EXISTS tonzinhos;
+CREATE SCHEMA tonzinhos;

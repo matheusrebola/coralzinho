@@ -23,7 +23,7 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true, nullable = false)
+    @Column(length = 100, unique = true, nullable = false)
     private String email;
 
     @Column(nullable = false)
@@ -32,6 +32,7 @@ public class Usuario {
     @Column(nullable = false)
     private String nome;
 
+    @Column(length = 20)
     private String telefone;
 
     @Enumerated(EnumType.STRING)
@@ -41,7 +42,9 @@ public class Usuario {
     @OneToMany(mappedBy = "pai", cascade = CascadeType.ALL)
     private List<Crianca> filhos;
 
+    @Column
     private LocalDateTime dataCadastro;
 
+    @Column
     private boolean ativo = true;
 }

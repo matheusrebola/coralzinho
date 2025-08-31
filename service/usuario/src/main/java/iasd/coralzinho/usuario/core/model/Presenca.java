@@ -30,10 +30,12 @@ public class Presenca {
     @JoinColumn(name = "professor_id", nullable = false)
     private Usuario professor;
 
+    @Column
     private LocalDateTime dataHora;
 
     @Column(nullable = false)
     private Integer tonzinhosGanhos = 10; // Valor padrão por presença
 
+    @Column(columnDefinition = "TEXT")
     private String observacao;
 }
