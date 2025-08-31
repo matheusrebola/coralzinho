@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  postgres-coralzinho:
+  postgres:
     image: postgres:15
     container_name: postgres-coralzinho
     environment:
@@ -20,14 +20,14 @@ services:
     image: rabbitmq:3.13-management
     container_name: rabbitmq
     ports:
-      - "25082:15672"
-      - "5672:5672"
+      - "25082:15672"  # UI
+      - "5672:5672"    # AMQP
     environment:
       RABBITMQ_DEFAULT_USER: guest
       RABBITMQ_DEFAULT_PASS: guest
     volumes:
       - rabbitmq_data:/var/lib/rabbitmq
-      - ./rabbitmq/definitions.json:/etc/rabbitmq/definitions.json
+      - ./rabbitmq/definitions.json:/etc/rabbitmq/definitions.json:ro
     command: >
       rabbitmq-server
       --load_definitions=/etc/rabbitmq/definitions.json

@@ -1,0 +1,385 @@
+{
+  "rabbit_version": "3.13.0",
+  "rabbitmq_version": "3.13.0",
+  "product_name": "RabbitMQ",
+  "product_version": "3.13.0",
+  "users": [
+    {
+      "name": "guest",
+      "password_hash": "BYIgYHH8tfSl3kR6I8vGlw==",
+      "hashing_algorithm": "rabbit_password_hashing_sha256",
+      "tags": [
+        "administrator"
+      ],
+      "limits": {}
+    }
+  ],
+  "vhosts": [
+    {
+      "name": "/"
+    }
+  ],
+  "permissions": [
+    {
+      "user": "guest",
+      "vhost": "/",
+      "configure": ".*",
+      "write": ".*",
+      "read": ".*"
+    }
+  ],
+  "topic_permissions": [],
+  "parameters": [],
+  "global_parameters": [
+    {
+      "name": "internal_cluster_id",
+      "value": "rabbitmq-cluster-id-coralzinho"
+    }
+  ],
+  "policies": [],
+  "exchanges": [
+    {
+      "name": "",
+      "vhost": "/",
+      "type": "direct",
+      "durable": true,
+      "auto_delete": false,
+      "internal": false,
+      "arguments": {}
+    },
+    {
+      "name": "amq.direct",
+      "vhost": "/",
+      "type": "direct",
+      "durable": true,
+      "auto_delete": false,
+      "internal": false,
+      "arguments": {}
+    },
+    {
+      "name": "amq.fanout",
+      "vhost": "/",
+      "type": "fanout",
+      "durable": true,
+      "auto_delete": false,
+      "internal": false,
+      "arguments": {}
+    },
+    {
+      "name": "amq.headers",
+      "vhost": "/",
+      "type": "headers",
+      "durable": true,
+      "auto_delete": false,
+      "internal": false,
+      "arguments": {}
+    },
+    {
+      "name": "amq.match",
+      "vhost": "/",
+      "type": "headers",
+      "durable": true,
+      "auto_delete": false,
+      "internal": false,
+      "arguments": {}
+    },
+    {
+      "name": "amq.rabbitmq.trace",
+      "vhost": "/",
+      "type": "topic",
+      "durable": true,
+      "auto_delete": false,
+      "internal": true,
+      "arguments": {}
+    },
+    {
+      "name": "amq.topic",
+      "vhost": "/",
+      "type": "topic",
+      "durable": true,
+      "auto_delete": false,
+      "internal": false,
+      "arguments": {}
+    },
+    {
+      "name": "autenticacao.exchange",
+      "vhost": "/",
+      "type": "direct",
+      "durable": true,
+      "auto_delete": false,
+      "internal": false,
+      "arguments": {}
+    },
+    {
+      "name": "crianca.exchange",
+      "vhost": "/",
+      "type": "direct",
+      "durable": true,
+      "auto_delete": false,
+      "internal": false,
+      "arguments": {}
+    },
+    {
+      "name": "presenca.exchange",
+      "vhost": "/",
+      "type": "direct",
+      "durable": true,
+      "auto_delete": false,
+      "internal": false,
+      "arguments": {}
+    },
+    {
+      "name": "professor.exchange",
+      "vhost": "/",
+      "type": "direct",
+      "durable": true,
+      "auto_delete": false,
+      "internal": false,
+      "arguments": {}
+    }
+  ],
+  "queues": [
+    {
+      "name": "autenticacao.login.req.queue",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    },
+    {
+      "name": "autenticacao.login.res.queue",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    },
+    {
+      "name": "autenticacao.cadastro.req.queue",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    },
+    {
+      "name": "autenticacao.cadastro.res.queue",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    },
+    {
+      "name": "crianca.adicionar.req.queue",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    },
+    {
+      "name": "crianca.adicionar.res.queue",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    },
+    {
+      "name": "crianca.atualizar.req.queue",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    },
+    {
+      "name": "crianca.atualizar.res.queue",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    },
+    {
+      "name": "crianca.buscar.req.queue",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    },
+    {
+      "name": "crianca.buscar.res.queue",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    },
+    {
+      "name": "presenca.registrar.req.queue",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    },
+    {
+      "name": "professor.aniversariantes.req.queue",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    },
+    {
+      "name": "professor.aniversariantes.res.queue",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    },
+    {
+      "name": "professor.horario.req.queue",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    },
+    {
+      "name": "professor.qrcode.req.queue",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    },
+    {
+      "name": "professor.qrcode.res.queue",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    }
+  ],
+  "bindings": [
+    {
+      "source": "autenticacao.exchange",
+      "vhost": "/",
+      "destination": "autenticacao.login.req.queue",
+      "destination_type": "queue",
+      "routing_key": "autenticacao.login.req",
+      "arguments": {}
+    },
+    {
+      "source": "autenticacao.exchange",
+      "vhost": "/",
+      "destination": "autenticacao.login.res.queue",
+      "destination_type": "queue",
+      "routing_key": "autenticacao.login.res",
+      "arguments": {}
+    },
+    {
+      "source": "autenticacao.exchange",
+      "vhost": "/",
+      "destination": "autenticacao.cadastro.req.queue",
+      "destination_type": "queue",
+      "routing_key": "autenticacao.cadastro.req",
+      "arguments": {}
+    },
+    {
+      "source": "autenticacao.exchange",
+      "vhost": "/",
+      "destination": "autenticacao.cadastro.res.queue",
+      "destination_type": "queue",
+      "routing_key": "autenticacao.cadastro.res",
+      "arguments": {}
+    },
+    {
+      "source": "crianca.exchange",
+      "vhost": "/",
+      "destination": "crianca.adicionar.req.queue",
+      "destination_type": "queue",
+      "routing_key": "crianca.adicionar.req",
+      "arguments": {}
+    },
+    {
+      "source": "crianca.exchange",
+      "vhost": "/",
+      "destination": "crianca.adicionar.res.queue",
+      "destination_type": "queue",
+      "routing_key": "crianca.adicionar.res",
+      "arguments": {}
+    },
+    {
+      "source": "crianca.exchange",
+      "vhost": "/",
+      "destination": "crianca.atualizar.req.queue",
+      "destination_type": "queue",
+      "routing_key": "crianca.atualizar.req",
+      "arguments": {}
+    },
+    {
+      "source": "crianca.exchange",
+      "vhost": "/",
+      "destination": "crianca.atualizar.res.queue",
+      "destination_type": "queue",
+      "routing_key": "crianca.atualizar.res",
+      "arguments": {}
+    },
+    {
+      "source": "crianca.exchange",
+      "vhost": "/",
+      "destination": "crianca.buscar.req.queue",
+      "destination_type": "queue",
+      "routing_key": "crianca.buscar.req",
+      "arguments": {}
+    },
+    {
+      "source": "crianca.exchange",
+      "vhost": "/",
+      "destination": "crianca.buscar.res.queue",
+      "destination_type": "queue",
+      "routing_key": "crianca.buscar.res",
+      "arguments": {}
+    },
+    {
+      "source": "presenca.exchange",
+      "vhost": "/",
+      "destination": "presenca.registrar.req.queue",
+      "destination_type": "queue",
+      "routing_key": "presenca.registrar.req",
+      "arguments": {}
+    },
+    {
+      "source": "professor.exchange",
+      "vhost": "/",
+      "destination": "professor.aniversariantes.req.queue",
+      "destination_type": "queue",
+      "routing_key": "professor.aniversariantes.req",
+      "arguments": {}
+    },
+    {
+      "source": "professor.exchange",
+      "vhost": "/",
+      "destination": "professor.aniversariantes.res.queue",
+      "destination_type": "queue",
+      "routing_key": "professor.aniversariantes.res",
+      "arguments": {}
+    },
+    {
+      "source": "professor.exchange",
+      "vhost": "/",
+      "destination": "professor.horario.req.queue",
+      "destination_type": "queue",
+      "routing_key": "professor.horario.req",
+      "arguments": {}
+    },
+    {
+      "source": "professor.exchange",
+      "vhost": "/",
+      "destination": "professor.qrcode.req.queue",
+      "destination_type": "queue",
+      "routing_key": "professor.qrcode.req",
+      "arguments": {}
+    },
+    {
+      "source": "professor.exchange",
+      "vhost": "/",
+      "destination": "professor.qrcode.res.queue",
+      "destination_type": "queue",
+      "routing_key": "professor.qrcode.res",
+      "arguments": {}
+    }
+  ]
+}
