@@ -1,0 +1,82 @@
+spring:
+  application:
+    name: gateway-coralzinho
+  mq:
+    autenticacao:
+      login-req:
+        exchange: "autenticacao.exchange"
+        routing-key: "autenticacao.login.req"
+        queue: "autenticacao.login.req.queue"
+      login-res:
+        exchange: "autenticacao.exchange"
+        routing-key: "autenticacao.login.res"
+        queue: "autenticacao.login.res.queue"
+      cadastro-req:
+        exchange: "autenticacao.exchange"
+        routing-key: "autenticacao.cadastro.req"
+        queue: "autenticacao.cadastro.req.queue"
+      cadastro-res:
+        exchange: "autenticacao.exchange"
+        routing-key: "autenticacao.cadastro.res"
+        queue: "autenticacao.cadastro.res.queue"
+    crianca:
+      adicionar-req:
+        exchange: "crianca.exchange"
+        routing-key: "crianca.adicionar.req"
+        queue: "crianca.adicionar.req.queue"
+      adicionar-res:
+        exchange: "crianca.exchange"
+        routing-key: "crianca.adicionar.res"
+        queue: "crianca.adicionar.res.queue"
+      atualizar-req:
+        exchange: "crianca.exchange"
+        routing-key: "crianca.atualizar.req"
+        queue: "crianca.atualizar.req.queue"
+      atualizar-res:
+        exchange: "crianca.exchange"
+        routing-key: "crianca.atualizar.res"
+        queue: "crianca.atualizar.res.queue"
+      buscar-req:
+        exchange: "crianca.exchange"
+        routing-key: "crianca.buscar.req"
+        queue: "crianca.buscar.req.queue"
+      buscar-res:
+        exchange: "crianca.exchange"
+        routing-key: "crianca.buscar.res"
+        queue: "crianca.buscar.res.queue"
+    presenca:
+      registrar-req:
+        exchange: "presenca.exchange"
+        routing-key: "presenca.registrar.req"
+        queue: "presenca.registrar.req.queue"
+    professor:
+      aniversariantes-req:
+        exchange: "professor.exchange"
+        routing-key: "professor.aniversariantes.req"
+        queue: "professor.aniversariantes.req.queue"
+      aniversariantes-res:
+        exchange: "professor.exchange"
+        routing-key: "professor.aniversariantes.res"
+        queue: "professor.aniversariantes.res.queue"
+      horario-req:
+        exchange: "professor.exchange"
+        routing-key: "professor.horario.req"
+        queue: "professor.horario.req.queue"
+      qrcode-req:
+        exchange: "professor.exchange"
+        routing-key: "professor.qrcode.req"
+        queue: "professor.qrcode.req.queue"
+      qrcode-res:
+        exchange: "professor.exchange"
+        routing-key: "professor.qrcode.res"
+        queue: "professor.qrcode.res.queue"
+
+  rabbitmq:
+    host: ${RABBITMQ_HOST:localhost}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_USERNAME:guest}
+    password: ${RABBITMQ_PASSWORD:guest}
+    virtual-host: ${RABBITMQ_VHOST:/}
+
+server:
+  port: ${APP_PORT:50001}
