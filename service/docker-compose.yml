@@ -15,10 +15,26 @@ services:
     networks:
       - tonzinhos-network
     restart: unless-stopped
-
+  
+  mongodb:
+    image: mongo:7.0
+    container_name: mongodb-coralzinho
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password123
+      MONGO_INITDB_DATABASE: coralzinho
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+      - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+    networks:
+      - tonzinhos-network
+    restart: unless-stopped 
+    
   rabbitmq:
     image: rabbitmq:3.13-management
-    container_name: rabbitmq
+    container_name: rabbitmq-coralzinho
     ports:
       - "25082:15672"  # UI
       - "5672:5672"    # AMQP
@@ -28,9 +44,18 @@ services:
     volumes:
       - rabbitmq_data:/var/lib/rabbitmq
       - ./rabbitmq/definitions.json:/etc/rabbitmq/definitions.json:ro
+    networks:
+      - tonzinhos-network 
     command: >
-      rabbitmq-server
-      --load_definitions=/etc/rabbitmq/definitions.json
+      bash -c "
+        rabbitmq-server &
+        sleep 10 &&
+        rabbitmq-plugins enable rabbitmq_management &&
+        if [ -f /etc/rabbitmq/definitions.json ]; then
+          rabbitmqctl import_definitions /etc/rabbitmq/definitions.json
+        fi &&
+        wait
+      "
 
 networks:
   tonzinhos-network:
@@ -40,6 +65,7 @@ networks:
 volumes:
   postgres_data:
     driver: local
+  mongodb_data:
+    driver: local
   rabbitmq_data:
     driver: local
-
